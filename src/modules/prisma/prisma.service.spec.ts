@@ -15,4 +15,8 @@ describe('PrismaService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should have a $connect method', () => {
+    expect(service.$connect).toBeDefined();
+  });
 });

@@ -16,6 +16,15 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/*": ["src/*"],
+      "@modules/*": ["src/modules/*"],
+      "@modules": ["src/modules/index.ts"],
+      "@globals/*": ["src/globals/*"],
+      "@globals": ["src/globals/index.ts"],
+      "@interfaces": ["src/globals/interfaces/index.ts"],
+      "@interfaces/*": ["src/globals/interfaces/*"]
+    }
   }
 }
