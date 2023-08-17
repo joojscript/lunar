@@ -2,6 +2,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator zod {
+  provider = "zod-prisma"
+  output   = "../src/schemas"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -19,7 +24,7 @@ model User {
   identity     String
   identityType Identity @map("identity_type")
 
-  Hosts Hosts[]
+  Hosts Host[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
@@ -27,7 +32,7 @@ model User {
   @@map("users")
 }
 
-model Hosts {
+model Host {
   id       String @id @default(uuid())
   label    String
   hostname String @unique

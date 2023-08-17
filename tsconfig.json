@@ -17,6 +17,7 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "strict": true,
     "paths": {
       "@/*": ["src/*"],
       "@modules/*": ["src/modules/*"],
@@ -24,7 +25,9 @@
       "@globals/*": ["src/globals/*"],
       "@globals": ["src/globals/index.ts"],
       "@interfaces": ["src/globals/interfaces/index.ts"],
-      "@interfaces/*": ["src/globals/interfaces/*"]
+      "@interfaces/*": ["src/globals/interfaces/*"],
+      "@schemas": ["src/schemas/index.ts"],
+      "@schemas/*": ["src/schemas/*"]
     }
   }
 }
