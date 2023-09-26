@@ -9,14 +9,24 @@ import {
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { HostsService } from './hosts.service';
+import { CreateHostInput } from './hots.dtos';
 
 @Controller('hosts')
 export class HostsController {
   constructor(private readonly hostsService: HostsService) {}
 
   @Post()
-  create(@Body() createHostDto: Prisma.HostCreateInput) {
-    return this.hostsService.createHost(createHostDto);
+  create(@Body() createHostDto: CreateHostInput) {
+    const formattedPayload: Prisma.HostCreateInput = {
+      ...createHostDto,
+      owner: {
+        connect: {
+          id: createHostDto.owner,
+        },
+      },
+    };
+
+    return this.hostsService.createHost(formattedPayload);
   }
 
   @Get()
