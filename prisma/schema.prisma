@@ -2,8 +2,8 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator zod {
-  provider = "zod-prisma"
+generator class_validator {
+  provider = "prisma-class-validator-generator"
   output   = "../src/schemas"
 }
 
