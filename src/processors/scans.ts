@@ -57,7 +57,7 @@ export default async function (job: Job, cb: DoneCallback) {
 
     cb(null, { port, protocol, state, service, reason });
   } catch (error) {
-    console.error(error);
+    Logger.error(error);
     cb(error as Error);
   }
 }

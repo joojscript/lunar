@@ -3,12 +3,14 @@ import {
   Controller,
   Delete,
   Get,
-  Headers,
   Param,
   Patch,
   Post,
+  Request,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { Request as ExpressRequest } from 'express';
+import { getClientIp } from 'request-ip';
 import {
   CreateHostInput,
   UpdateHostInput,
@@ -21,20 +23,20 @@ import { HostsService } from './hosts.service';
 export class HostsController {
   constructor(private readonly hostsService: HostsService) {}
 
-  @Post('verify-host-request')
+  @Post('verify_host_request')
   async handleVerifyHostRequest(
-    verifyHostRequestInput: VerifyHostRequestInput,
+    @Body() verifyHostRequestInput: VerifyHostRequestInput,
   ) {
     return this.hostsService.verifyHostRequest(verifyHostRequestInput);
   }
 
-  @Post('verify-host/:uuid')
+  @Post('verify_host/:uuid')
   async handleVerifyHost(
-    @Headers('host') hostname: string,
     @Param('uuid') uuid: string,
+    @Request() request: ExpressRequest,
   ) {
     const verifyHostInput: VerifyHostInput = {
-      hostname,
+      hostname: getClientIp(request),
       uuid,
     };
 

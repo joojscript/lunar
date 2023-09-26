@@ -14,8 +14,8 @@ export class SchedulerService {
     private readonly hostsService: HostsService,
   ) {}
 
-  // @Cron('45 * * * * *')
-  @Cron('*/5 * * * * *')
+  // Every 5 minutes
+  @Cron('* */5 * * * *')
   async handleCron() {
     this.logger.debug('Executing Cron Host Scan Round');
 

@@ -1,6 +1,12 @@
 import { IN_MEMORY_STORES } from '@/globals/constants/stores';
 import { MemoryStoreService } from '@/globals/services/memory-store.service';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { isValidIp } from '@/helpers/scanner';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { Host, Prisma } from '@prisma/client';
 import { randomUUID } from 'crypto';
 import { VerifyHostInput, VerifyHostRequestInput } from './hosts.dtos';
@@ -10,6 +16,8 @@ const VERIFY_HOST_REQUEST_EXPIRATION_TIME = 1000 * 60 * 5; // 5 minutes
 
 @Injectable()
 export class HostsService {
+  private readonly logger = new Logger(HostsService.name);
+
   constructor(
     private readonly repository: HostsRepository,
     private readonly memoryStoreService: MemoryStoreService,
@@ -55,6 +63,10 @@ export class HostsService {
       throw new NotFoundException('Host not found');
     }
 
+    if (host.verifiedAt != null) {
+      throw new BadRequestException('Host already verified');
+    }
+
     const randomAssignedUuid = randomUUID();
 
     this.memoryStoreService.append(
@@ -77,6 +89,13 @@ export class HostsService {
   }
 
   async verifyHost(verifyHostInput: VerifyHostInput) {
+    if (!isValidIp(verifyHostInput.hostname)) {
+      this.logger.error(
+        `Trying to verify host with unrecognized hostname: ${verifyHostInput.hostname}`,
+      );
+      throw new BadRequestException('Invalid hostname');
+    }
+
     const tmpHostStore = this.memoryStoreService.get(
       IN_MEMORY_STORES.VERIFY_HOST_TEMPORARY_UUID,
     );
@@ -101,7 +120,7 @@ export class HostsService {
     });
 
     return await this.updateHost({
-      data: { ...host, updatedAt: new Date() },
+      data: { ...host, verifiedAt: new Date() },
       where: { id: host.id },
     });
   }
