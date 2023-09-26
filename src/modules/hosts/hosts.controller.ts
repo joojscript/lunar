@@ -8,8 +8,8 @@ import {
   Post,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { CreateHostInput, UpdateHostInput } from './hosts.dtos';
 import { HostsService } from './hosts.service';
-import { CreateHostInput } from './hots.dtos';
 
 @Controller('hosts')
 export class HostsController {
@@ -40,11 +40,20 @@ export class HostsController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateHostDto: Prisma.HostUpdateInput,
-  ) {
-    return this.hostsService.updateHost({ where: { id }, data: updateHostDto });
+  update(@Param('id') id: string, @Body() updateHostDto: UpdateHostInput) {
+    const formattedPayload: Prisma.HostUpdateInput = {
+      ...updateHostDto,
+      owner: {
+        connect: {
+          id: updateHostDto.owner,
+        },
+      },
+    };
+
+    return this.hostsService.updateHost({
+      where: { id },
+      data: formattedPayload,
+    });
   }
 
   @Delete(':id')

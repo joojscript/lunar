@@ -1,14 +1,9 @@
--- CreateEnum
-CREATE TYPE "Identity" AS ENUM ('PASSWORD');
-
 -- CreateTable
 CREATE TABLE "users" (
     "id" TEXT NOT NULL,
-    "first_name" TEXT NOT NULL,
-    "last_name" TEXT NOT NULL,
+    "first_name" TEXT,
+    "last_name" TEXT,
     "email" TEXT NOT NULL,
-    "identity" TEXT NOT NULL,
-    "identity_type" "Identity" NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -18,7 +13,7 @@ CREATE TABLE "users" (
 -- CreateTable
 CREATE TABLE "hosts" (
     "id" TEXT NOT NULL,
-    "label" TEXT NOT NULL,
+    "label" TEXT,
     "hostname" TEXT NOT NULL,
     "owner_id" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

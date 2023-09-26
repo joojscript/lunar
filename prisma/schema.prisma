@@ -7,17 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Identity {
-  PASSWORD
-}
-
 model User {
-  id           String   @id @default(uuid())
-  firstName    String   @map("first_name")
-  lastName     String   @map("last_name")
-  email        String   @unique
-  identity     String
-  identityType Identity @map("identity_type")
+  id        String  @id @default(uuid())
+  firstName String? @map("first_name")
+  lastName  String? @map("last_name")
+  email     String  @unique
 
   Hosts Host[]
 
@@ -28,9 +22,9 @@ model User {
 }
 
 model Host {
-  id       String @id @default(uuid())
-  label    String
-  hostname String @unique
+  id       String  @id @default(uuid())
+  label    String?
+  hostname String  @unique
 
   ownerId String @map("owner_id")
   owner   User   @relation(fields: [ownerId], references: [id])

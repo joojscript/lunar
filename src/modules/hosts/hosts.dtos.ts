@@ -11,8 +11,9 @@ const MESSAGES = {
 };
 
 export class CreateHostInput {
+  @IsOptional()
   @IsString({ message: MESSAGES.INVALID_LABEL })
-  label: string;
+  label?: string;
 
   @IsString({ message: MESSAGES.INVALID_HOSTNAME })
   @Matches(HOST_HOSTNAME_REGEX, {
