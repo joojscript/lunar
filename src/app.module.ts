@@ -1,3 +1,5 @@
+import { ExpressAdapter } from '@bull-board/express';
+import { BullBoardModule } from '@bull-board/nestjs';
 import { HostsModule, PrismaModule, UsersModule } from '@modules';
 import { UsersService } from '@modules/users/users.service';
 import { Module } from '@nestjs/common';
@@ -10,6 +12,10 @@ import { AuthModule } from './modules/auth/auth.module';
 
 const GLOBAL_MODULES = [
   ConfigModule.forRoot({ isGlobal: true }),
+  BullBoardModule.forRoot({
+    route: '/queues',
+    adapter: ExpressAdapter,
+  }),
   GlobalServicesModule,
   PrismaModule,
   ScheduleModule.forRoot(),

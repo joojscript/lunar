@@ -16,7 +16,7 @@ model User {
   Hosts Host[]
 
   createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @map("updated_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
   @@map("users")
 }
@@ -29,8 +29,27 @@ model Host {
   ownerId String @map("owner_id")
   owner   User   @relation(fields: [ownerId], references: [id])
 
+  verifiedAt DateTime? @map("verified_at")
+
   createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @map("updated_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+  Scan      Scan[]
 
   @@map("hosts")
+}
+
+model Scan {
+  id       String @id @default(uuid())
+  hostId   String @map("host_id")
+  host     Host   @relation(fields: [hostId], references: [id])
+  port     Int
+  protocol String
+  service  String
+  state    String
+  reason   String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("scans")
 }
