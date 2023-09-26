@@ -3,17 +3,43 @@ import {
   Controller,
   Delete,
   Get,
+  Headers,
   Param,
   Patch,
   Post,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { CreateHostInput, UpdateHostInput } from './hosts.dtos';
+import {
+  CreateHostInput,
+  UpdateHostInput,
+  VerifyHostInput,
+  VerifyHostRequestInput,
+} from './hosts.dtos';
 import { HostsService } from './hosts.service';
 
 @Controller('hosts')
 export class HostsController {
   constructor(private readonly hostsService: HostsService) {}
+
+  @Post('verify-host-request')
+  async handleVerifyHostRequest(
+    verifyHostRequestInput: VerifyHostRequestInput,
+  ) {
+    return this.hostsService.verifyHostRequest(verifyHostRequestInput);
+  }
+
+  @Post('verify-host/:uuid')
+  async handleVerifyHost(
+    @Headers('host') hostname: string,
+    @Param('uuid') uuid: string,
+  ) {
+    const verifyHostInput: VerifyHostInput = {
+      hostname,
+      uuid,
+    };
+
+    return this.hostsService.verifyHost(verifyHostInput);
+  }
 
   @Post()
   create(@Body() createHostDto: CreateHostInput) {

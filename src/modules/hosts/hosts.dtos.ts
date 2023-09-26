@@ -38,3 +38,20 @@ export class UpdateHostInput {
   @IsUUID('4', { message: MESSAGES.INVALID_OWNER })
   owner?: string;
 }
+
+export class VerifyHostRequestInput {
+  @IsUUID('4', { message: MESSAGES.INVALID_ID })
+  hostId!: string;
+}
+
+export class VerifyHostInput {
+  @IsString({ message: MESSAGES.INVALID_HOSTNAME })
+  @Matches(HOST_HOSTNAME_REGEX, {
+    message: MESSAGES.INVALID_HOSTNAME,
+  })
+  hostname!: string;
+
+  @IsString({ message: MESSAGES.INVALID_UUID })
+  @IsUUID('4', { message: MESSAGES.INVALID_UUID })
+  uuid!: string;
+}
