@@ -1,14 +1,8 @@
+import { MESSAGES } from '@/globals/constants/messages';
 import { IsOptional, IsString, IsUUID, Matches } from 'class-validator';
 
 const HOST_HOSTNAME_REGEX =
   /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)+([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$/gm;
-
-const MESSAGES = {
-  INVALID_HOSTNAME: 'Invalid hostname',
-  INVALID_LABEL: 'Invalid label',
-  INVALID_OWNER: 'Invalid Owner ID',
-  INVALID_ID: 'Invalid ID',
-};
 
 export class CreateHostInput {
   @IsOptional()

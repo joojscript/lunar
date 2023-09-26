@@ -1,0 +1,3 @@
+export enum IN_MEMORY_STORES {
+  USER_OTP_CODES = 'USER_OTP_CODES',
+}

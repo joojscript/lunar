@@ -5,20 +5,20 @@ import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MailerService, SchedulerService } from './globals/services';
+import { GlobalServicesModule } from './globals/services/global-services.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 const GLOBAL_MODULES = [
   ConfigModule.forRoot({ isGlobal: true }),
+  GlobalServicesModule,
   PrismaModule,
   ScheduleModule.forRoot(),
 ];
-const DOMAIN_MODULES = [UsersModule, HostsModule];
-
-const GLOBAL_SERVICES = [SchedulerService, MailerService];
+const DOMAIN_MODULES = [UsersModule, HostsModule, AuthModule];
 
 @Module({
   imports: [...GLOBAL_MODULES, ...DOMAIN_MODULES],
   controllers: [AppController],
-  providers: [...GLOBAL_SERVICES, AppService, UsersService],
+  providers: [AppService, UsersService],
 })
 export class AppModule {}

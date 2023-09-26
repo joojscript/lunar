@@ -22,6 +22,8 @@
       "@/*": ["src/*"],
       "@modules/*": ["src/modules/*"],
       "@modules": ["src/modules/index"],
+      "@constants/*": ["src/globals/constants/*"],
+      "@constants": ["src/globals/constants/index"],
       "@globals/*": ["src/globals/*"],
       "@globals": ["src/globals/index"],
       "@interfaces": ["src/globals/interfaces/index"],

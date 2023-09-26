@@ -4,21 +4,24 @@ import { ConfigService } from '@nestjs/config';
 
 type SendEmailPayload = {
   to: string;
-  from: string;
-  subject: string;
-  data: Record<string, any>;
-};
+} & Record<string, any>;
+
+export enum EMAIL_TEMPLATES {
+  SEND_OTP_CODE,
+}
 
 @Injectable()
 export class MailerService {
   private readonly logger = new Logger(MailerService.name);
 
-  publicKey = this.configService.get<string>('MAILER_PUBLIC_KEY');
-  privateKey = this.configService.get<string>('MAILER_PRIVATE_KEY');
-  serviceId = this.configService.get<string>('MAILER_SERVICE_ID');
+  private publicKey = this.configService.get<string>('MAILER_PUBLIC_KEY');
+  private privateKey = this.configService.get<string>('MAILER_PRIVATE_KEY');
+  private serviceId = this.configService.get<string>('MAILER_SERVICE_ID');
 
-  EMAIL_TEMPLATES = {
-    OTP_CODE_SEND: this.configService.get<string>('MAILER_OTP_CODE_SEND'),
+  private EMAIL_TEMPLATES = {
+    OTP_CODE_SEND: this.configService.get<string>(
+      'MAIL_TEMPLATE_OTP_CODE_SEND',
+    ),
   };
 
   constructor(private readonly configService: ConfigService) {
@@ -29,10 +32,22 @@ export class MailerService {
   }
 
   send(
-    mail: keyof typeof MailerService.prototype.EMAIL_TEMPLATES,
+    mail: EMAIL_TEMPLATES,
     payload: SendEmailPayload,
   ): Promise<EmailJSResponseStatus> {
+    console.log(mail);
     this.logger.log(`Sending email to ${payload.to} with template ${mail}`);
-    return emailjs.send(this.serviceId, this.EMAIL_TEMPLATES[mail], payload);
+    return emailjs.send(
+      this.serviceId,
+      this.findEmailTemplateId(mail),
+      payload,
+    );
+  }
+
+  private findEmailTemplateId(mail: EMAIL_TEMPLATES) {
+    switch (mail) {
+      case EMAIL_TEMPLATES.SEND_OTP_CODE:
+        return this.EMAIL_TEMPLATES.OTP_CODE_SEND;
+    }
   }
 }
