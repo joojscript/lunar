@@ -8,6 +8,7 @@ import { MemoryStoreService } from '@/globals/services/memory-store.service';
 import {
   BadRequestException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -59,7 +60,7 @@ export class AuthService {
       verifyOtpCodeDto.email,
     );
 
-    return this.generateAndSendToken(verifyOtpCodeDto.email);
+    return await this.generateAndSendToken(verifyOtpCodeDto.email);
   }
 
   private generateAndAttachOtpCodeToUser(userEmail: string) {
@@ -72,8 +73,12 @@ export class AuthService {
     return otpCode;
   }
 
-  private generateAndSendToken(userEmail: string) {
-    const token = this.jwtService.sign({ email: userEmail });
+  private async generateAndSendToken(userEmail: string) {
+    const foundUser = await this.usersService.findOne({ email: userEmail });
+    if (!foundUser) {
+      throw new InternalServerErrorException(MESSAGES.USER_NOT_FOUND);
+    }
+    const token = this.jwtService.sign({ user_id: foundUser.id });
 
     return { access_token: token };
   }

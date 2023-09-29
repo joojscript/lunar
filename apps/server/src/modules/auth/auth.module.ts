@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from '../users/users.module';
-import { privateKey } from './auth.constants';
+import { privateKey, publicKey } from './auth.constants';
 import { AuthController } from './auth.controller';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
     UsersModule,
     JwtModule.register({
       privateKey,
+      publicKey,
       signOptions: { expiresIn: '7m', algorithm: 'RS256' },
       verifyOptions: {
         algorithms: ['RS256'],

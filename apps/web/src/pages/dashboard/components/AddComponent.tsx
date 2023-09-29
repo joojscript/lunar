@@ -32,7 +32,7 @@ export const AddComponent = () => {
           Simply create your first component
         </div>
         <div className="mt-1 text-white">Just click on the button</div>
-        <div className="flex items-center p-3 mt-3 bg-[#2f49d1] rounded-[15px] padding-[8px 16px] justify-center text-white">
+        <div className="cursor-pointer flex items-center p-3 mt-3 bg-[#2f49d1] rounded-[15px] padding-[8px 16px] justify-center text-white">
           <Icon path="res-react-dash-add-component" className="w-5 h-5" />
           <div className="ml-2">Add Component</div>
           <div className="ml-2 bg-[#4964ed] rounded-[15px] pt-1 pb-1 pl-2 pr-2">

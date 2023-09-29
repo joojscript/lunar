@@ -1,8 +1,15 @@
 import localforage from "localforage";
 import { map } from "nanostores";
+import type { ScanType } from "src/globals/types";
+
+type LatestDashboardDataType = {
+  data: Array<ScanType>;
+  lastFetch: Date;
+};
 
 type DashboardStoreType = {
   showSidebar: boolean;
+  latestData?: LatestDashboardDataType;
 };
 
 const initialState: DashboardStoreType = (await localforage.getItem(

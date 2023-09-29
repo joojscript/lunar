@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GlobalServicesModule } from './globals/services/global-services.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { ScansModule } from './modules/scans/scans.module';
 
 const GLOBAL_MODULES = [
   ConfigModule.forRoot({ isGlobal: true }),
@@ -18,7 +19,7 @@ const GLOBAL_MODULES = [
   GlobalServicesModule,
   PrismaModule,
 ];
-const DOMAIN_MODULES = [UsersModule, HostsModule, AuthModule];
+const DOMAIN_MODULES = [UsersModule, HostsModule, AuthModule, ScansModule];
 
 @Module({
   imports: [...GLOBAL_MODULES, ...DOMAIN_MODULES],

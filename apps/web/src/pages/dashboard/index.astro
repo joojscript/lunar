@@ -1,14 +1,12 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import DataLoader from "./DataLoader";
 import Content from "./components/Content.astro";
 import Sidebar from "./components/Sidebar";
-
-import { AuthStore } from "../../stores/auth.store";
-
-console.log(AuthStore.get());
 ---
 
 <Layout title="Dashboard | Lunar">
+  <DataLoader client:only />
   <div class="flex w-screen">
     <Sidebar client:only />
     <Content />
