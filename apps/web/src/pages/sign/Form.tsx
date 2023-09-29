@@ -65,11 +65,12 @@ const SignForm: React.FC = () => {
             method: "POST",
           });
 
-          if (result.status == 200) {
+          if (result.status == 200 || result.status == 201) {
             const data = await result.json();
             AuthStore.set({ ...AuthStore.get(), ...data });
             toast.success("You are now logged in");
             window.location.href = "/dashboard";
+            window.location.replace("/dashboard");
             return;
           } else {
             toast.error("Invalid OTP code");

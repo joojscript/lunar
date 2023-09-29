@@ -7,7 +7,7 @@ type Props = React.PropsWithChildren<{}>;
 
 const PrivateRoutes: React.FC<Props> = ({ children }) => {
   if (
-    !AuthStore.get().session_id &&
+    !AuthStore.get().access_token &&
     PRIVATE_ROUTES.includes(window.location.pathname)
   ) {
     window.location.href = "/sign";
