@@ -4,6 +4,7 @@ import { BullBoardModule } from '@bull-board/nestjs';
 import { BullModule } from '@nestjs/bull';
 import { Global, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
 import { join } from 'path';
 import { QUEUE_NAMES } from '../constants/queues';
 import { MailerService } from './mailer.service';
@@ -30,6 +31,7 @@ import { SchedulerService } from './scheduler.service';
       name: QUEUE_NAMES.SCANS,
       adapter: BullMQAdapter,
     }),
+    ScheduleModule.forRoot(),
     HostsModule,
   ],
   exports: [SchedulerService, MailerService, MemoryStoreService],

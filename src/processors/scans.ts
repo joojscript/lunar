@@ -11,12 +11,10 @@ const PARSE_SCAN_RESULT_REGEXP =
   /(\d+)\/([A-Za-z0-9-_]+)\s+([A-Za-z0-9-_]+)\s+([A-Za-z0-9-_]+)\s+([A-Za-z0-9-_]+)/gm;
 
 const prismaClient = new PrismaClient();
+const logger = new Logger('Scan Processor');
 
 export default async function (job: Job, cb: DoneCallback) {
-  Logger.debug(
-    `[${process.pid}] Starting Scan for ${job.data.hostname}`,
-    'Scan Processor',
-  );
+  logger.debug(`[${process.pid}] Starting Scan for ${job.data.hostname}`);
 
   try {
     const { stdout } = await execPromise(
@@ -57,7 +55,7 @@ export default async function (job: Job, cb: DoneCallback) {
 
     cb(null, { port, protocol, state, service, reason });
   } catch (error) {
-    Logger.error(error);
+    logger.error(error);
     cb(error as Error);
   }
 }

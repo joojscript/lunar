@@ -4,7 +4,6 @@ import { HostsModule, PrismaModule, UsersModule } from '@modules';
 import { UsersService } from '@modules/users/users.service';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GlobalServicesModule } from './globals/services/global-services.module';
@@ -18,7 +17,6 @@ const GLOBAL_MODULES = [
   }),
   GlobalServicesModule,
   PrismaModule,
-  ScheduleModule.forRoot(),
 ];
 const DOMAIN_MODULES = [UsersModule, HostsModule, AuthModule];
 
