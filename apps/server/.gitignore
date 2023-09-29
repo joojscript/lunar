@@ -39,3 +39,6 @@ lerna-debug.log*
 
 # Generated Schemas
 src/schemas
+
+# Private key for JWT encryption
+keys/private.pem
