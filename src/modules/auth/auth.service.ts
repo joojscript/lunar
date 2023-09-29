@@ -10,6 +10,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { LoginAttemptDto, VerifyOtpCodeDto } from './auth.dtos';
 
@@ -19,6 +20,7 @@ export class AuthService {
     private readonly mailerService: MailerService,
     private readonly memoryStoreService: MemoryStoreService,
     private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async sendOtpCode(loginAttemptDto: LoginAttemptDto) {
@@ -57,7 +59,7 @@ export class AuthService {
       verifyOtpCodeDto.email,
     );
 
-    return '';
+    return this.generateAndSendToken(verifyOtpCodeDto.email);
   }
 
   private generateAndAttachOtpCodeToUser(userEmail: string) {
@@ -68,5 +70,11 @@ export class AuthService {
     });
 
     return otpCode;
+  }
+
+  private generateAndSendToken(userEmail: string) {
+    const token = this.jwtService.sign({ email: userEmail });
+
+    return { access_token: token };
   }
 }
