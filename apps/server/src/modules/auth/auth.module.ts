@@ -13,7 +13,8 @@ import { AuthService } from './auth.service';
     JwtModule.register({
       privateKey,
       publicKey,
-      signOptions: { expiresIn: '7m', algorithm: 'RS256' },
+      // signOptions: { expiresIn: '7m', algorithm: 'RS256' },
+      signOptions: { expiresIn: '99d', algorithm: 'RS256' },
       verifyOptions: {
         algorithms: ['RS256'],
       },

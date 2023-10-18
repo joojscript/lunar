@@ -1,50 +1,25 @@
-# Welcome to [Astro](https://astro.build)
+# Flutter Responsive Admin/Dashboard Template
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/s/github/withastro/astro/tree/latest/examples/basics)
+## [Live Preview](https://abuanwar072.github.io/Flutter-Responsive-Admin-Panel-or-Dashboard/#/)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+I've created a step-by-step video tutorial to guide you through the process of building this responsive admin panel. **[Watch it on YouTube](https://youtu.be/_uOgXpEHNbc)**
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
+Flutter V2.\* has officially introduced web support on its stable branch. Today, I'm excited to present a Flutter-based Admin panel, often referred to as a dashboard UI. This Flutter dashboard template, which you can find on GitHub, is a comprehensive solution for your app's backend needs. It comes with a wide array of features including charts, tables, and neatly designed info cards.
 
+This flutter dashboard library is versatile; it's tailored to work seamlessly on the Web, macOS app, tablets, and both Android and iOS phones. The principle 'code once, run everywhere' truly comes to life with this.
 
-## 🚀 Project Structure
+**Packages we are using:**
 
-Inside of your Astro project, you'll see the following folders and files:
+- flutter_svg: [link](https://pub.dev/packages/flutter_svg)
+- google_fonts: [link](https://pub.dev/packages/google_fonts)
+- provider: [link](https://pub.dev/packages/provider)
 
-```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+**Fonts**
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- Poppins [link](https://fonts.google.com/specimen/Poppins)
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Responsive Admin Panel or Dashboard Final UI Preview
 
-Any static assets, like images, can be placed in the `public/` directory.
+![Preview](/gif.gif)
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                             |
-| :--------------------- | :------------------------------------------------- |
-| `npm install`          | Installs dependencies                              |
-| `npm run dev`          | Starts local dev server at `localhost:3000`        |
-| `npm run build`        | Build your production site to `./dist/`            |
-| `npm run preview`      | Preview your build locally, before deploying       |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
-| `npm run astro --help` | Get help using the Astro CLI                       |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+![App UI](/ui.png)
