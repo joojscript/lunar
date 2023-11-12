@@ -1,9 +1,12 @@
 import localforage from "localforage";
 import { map } from "nanostores";
-import type { ScanType } from "src/globals/types";
+import type { HostType, ScanType } from "src/globals/types";
 
 type LatestDashboardDataType = {
-  data: Array<ScanType>;
+  data: {
+    scansData: Array<ScanType>;
+    hostsData: Array<HostType>;
+  };
   lastFetch: Date;
 };
 

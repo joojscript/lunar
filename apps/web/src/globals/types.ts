@@ -17,3 +17,13 @@ export type UserType = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type HostType = {
+  id: string;
+  hostname: string;
+  label?: string;
+  verifiedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  scans?: Array<ScanType>;
+};

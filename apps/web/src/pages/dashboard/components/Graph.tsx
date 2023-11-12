@@ -32,7 +32,7 @@ export const Graph: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const size = useSize(containerRef);
   const { latestData } = DashboardStore.get();
-  const data = latestData?.data;
+  const data = latestData?.data.scansData;
   const groupedData = groupBy(data, "service");
   const formattedData = Object.entries(groupedData).map<GraphDataType>(
     ([service, appearances]) => ({

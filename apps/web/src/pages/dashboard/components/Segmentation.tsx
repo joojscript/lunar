@@ -1,6 +1,5 @@
 import { DashboardStore } from "@stores/dashboard.store";
 import { groupBy } from "lodash";
-import { Icon } from "./Icon";
 
 type SegmentationDataType = {
   c1: string;
@@ -13,7 +12,7 @@ const COLORS = ["#363636", "#818bb1", "#2c365d", "#334ed8"];
 
 export const Segmentation = () => {
   const { latestData } = DashboardStore.get();
-  const data = latestData?.data;
+  const data = latestData?.data.scansData;
   const groupedData = groupBy(data, "service");
   const formattedData = Object.entries(groupedData).map<SegmentationDataType>(
     ([service, appearances], index) => ({
@@ -28,8 +27,6 @@ export const Segmentation = () => {
     <div className="p-4 h-full">
       <div className="flex justify-between items-center">
         <div className="text-white font-bold">Segmentação</div>
-
-        <Icon path="res-react-dash-options" className="w-2 h-2" />
       </div>
       <div className="mt-3 text-white">Todos os hosts</div>
       <div className="overflow-scroll">
@@ -66,11 +63,6 @@ export const Segmentation = () => {
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="flex mt-3 px-3 items-center justify-between bg-details rounded-xl w-36 h-12">
-        <div className="text-white">Details</div>
-        <Icon path="res-react-dash-chevron-right" className="w-4 h-4" />
       </div>
     </div>
   );

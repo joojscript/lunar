@@ -2,7 +2,6 @@ import { animated, config, useSpring } from "@react-spring/web";
 import { DashboardStore } from "@stores/dashboard.store";
 import type { ScanType } from "src/globals/types";
 import { map, pi, tau } from "../helpers";
-import { Icon } from "./Icon";
 
 const getOpenedPercentage = (data?: Array<ScanType>): number => {
   if (!data) return 0;
@@ -12,7 +11,7 @@ const getOpenedPercentage = (data?: Array<ScanType>): number => {
 
 export const Score = () => {
   const { latestData } = DashboardStore.get();
-  const data = latestData?.data;
+  const data = latestData?.data.scansData;
   const openPercentage = getOpenedPercentage(data);
 
   const { dashOffset } = useSpring({
@@ -25,7 +24,6 @@ export const Score = () => {
     <div className="p-4 h-full">
       <div className="flex justify-between items-center">
         <div className="text-white font-bold">Score</div>
-        <Icon path="res-react-dash-options" className="w-2 h-2" />
       </div>
       <div className="mt-3 text-white">Baseado em todos os seus hosts</div>
       <div className="flex justify-center">

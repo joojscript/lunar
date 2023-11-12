@@ -1,9 +1,8 @@
 ---
-import { employeeData } from "../helpers/data";
 import { AddComponent } from "./AddComponent";
 import { Graph } from "./Graph";
 import { Header } from "./Header";
-import { NameCard } from "./NameCard";
+import { HostsSection } from "./HostsSection";
 import { Score } from "./Score";
 import { Segmentation } from "./Segmentation";
 import { TopServicesExposed } from "./TopServicesExposed";
@@ -15,30 +14,7 @@ import { TopServicesExposed } from "./TopServicesExposed";
   >
     <Header client:only />
     <div class="w-full grid sm:grid-cols-3 grid-rows-1 gap-0">
-      {
-        employeeData.map(
-          ({
-            id,
-            name,
-            position,
-            transactions,
-            rise,
-            tasksCompleted,
-            imgId,
-          }) => (
-            <NameCard
-              key={id}
-              id={String(id)}
-              name={name}
-              position={position}
-              transactionAmount={transactions}
-              rise={rise}
-              tasksCompleted={tasksCompleted}
-              imgId={imgId}
-            />
-          )
-        )
-      }
+      <HostsSection client:only />
 
       <div class="w-full p-2 sm:col-span-2">
         <div class="rounded-lg bg-card sm:h-80 h-60">

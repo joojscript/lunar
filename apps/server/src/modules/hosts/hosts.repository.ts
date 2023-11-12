@@ -14,21 +14,8 @@ export class HostsRepository {
     });
   }
 
-  async findMany(params: {
-    skip?: number;
-    take?: number;
-    cursor?: Prisma.HostWhereUniqueInput;
-    where?: Prisma.HostWhereInput;
-    orderBy?: Prisma.HostOrderByWithRelationInput;
-  }): Promise<Host[]> {
-    const { skip, take, cursor, where, orderBy } = params;
-    return this.prisma.host.findMany({
-      skip,
-      take,
-      cursor,
-      where,
-      orderBy,
-    });
+  async findMany(params: Prisma.HostFindManyArgs): Promise<Host[]> {
+    return this.prisma.host.findMany(params);
   }
 
   async create(data: Prisma.HostCreateInput): Promise<Host> {

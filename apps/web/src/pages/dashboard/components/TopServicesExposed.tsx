@@ -11,7 +11,7 @@ type FormattedDataType = {
 
 export const TopServicesExposed: React.FC<{}> = () => {
   const { latestData } = DashboardStore.get();
-  const data = latestData?.data;
+  const data = latestData?.data.scansData;
   const groupedData = groupBy(data, "service");
   const formattedData = Object.entries(groupedData).map<FormattedDataType>(
     ([service, appearances]) => ({

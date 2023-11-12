@@ -67,6 +67,27 @@ export class HostsController {
     return this.hostsService.findOne({ id });
   }
 
+  @Get('top/:amount')
+  findTopX(
+    @Param('amount') amount: number,
+    @Request() request: ExpressRequest,
+  ) {
+    return this.hostsService.findMany({
+      take: Number(amount),
+      where: {
+        owner: {
+          id: request['userId'],
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        scans: true,
+      },
+    });
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateHostDto: UpdateHostInput) {
     const formattedPayload: Prisma.HostUpdateInput = {

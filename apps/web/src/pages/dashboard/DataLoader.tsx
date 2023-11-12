@@ -7,20 +7,25 @@ const DataLoader: React.FC = () => {
 
   useEffect(() => {
     async function loadData() {
-      const result = await makeRequest("/scans/latest", { method: "GET" });
-      const data = await result.json();
+      const [scansResult, hostsResult] = await Promise.all([
+        makeRequest("/scans/latest", { method: "GET" }),
+        makeRequest("/hosts/top/3", { method: "GET" }),
+      ]);
       const currentDashboardStoreData = DashboardStore.get();
       const newData = {
         ...currentDashboardStoreData,
         latestData: {
-          data,
+          data: {
+            scansData: await scansResult.json(),
+            hostsData: await hostsResult.json(),
+          },
           lastFetch: new Date(),
         },
       };
 
       DashboardStore.set(newData);
 
-      if (data.length > 0) setHasData(true);
+      if (newData.latestData.data.hostsData.length > 0) setHasData(true);
     }
     loadData();
   }, []);

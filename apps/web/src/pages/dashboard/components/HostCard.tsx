@@ -1,46 +1,44 @@
+import { Icons } from "@components/icons";
 import { animated, useSpring } from "@react-spring/web";
-import { Image } from "./Image";
+import Avvvatars from "avvvatars-react";
+import type { HostType } from "src/globals/types";
 import { Icon } from "./Icon";
 
-type Props = {
-  name: string;
-  position: string;
-  transactionAmount: number;
-  rise: boolean;
-  tasksCompleted: number;
-  imgId: number;
-  key?: string | number;
-} & React.HTMLAttributes<HTMLDivElement>;
+type Props = HostType & React.HTMLAttributes<HTMLDivElement>;
 
-export const NameCard: React.FC<Props> = ({
-  name,
-  position,
-  transactionAmount,
-  rise,
-  tasksCompleted,
-  imgId,
+export const HostCard: React.FC<Props> = ({
+  id,
+  hostname,
+  label,
+  updatedAt,
+  verifiedAt,
+  createdAt,
+  scans,
 }) => {
-  const { transactions, barPlayhead } = useSpring({
-    transactions: transactionAmount,
+  const { transactions } = useSpring({
+    transactions: scans?.length ?? 0,
     barPlayhead: 1,
     from: { transactions: 0, barPlayhead: 0 },
   });
+
   return (
     <div className="w-full h-full p-2">
       <div className="rounded-lg bg-card flex justify-between p-3 h-32">
         <div className="">
           <div className="flex items-center">
-            <Image path={`mock_faces_${imgId}`} className="w-10 h-10" />
+            <Avvvatars value={id} />
             <div className="ml-2">
               <div className="flex items-center">
-                <div className="mr-2 font-bold text-white">{name}</div>
+                <div className="mr-2 font-bold text-white">{hostname}</div>
                 <Icon path="res-react-dash-tick" />
               </div>
-              <div className="text-sm text-white">{position}</div>
+              <div className="text-sm text-white">
+                {new Date(createdAt).toUTCString()}
+              </div>
             </div>
           </div>
 
-          <div className="text-sm text-white mt-2">{`${tasksCompleted} from 5 tasks completed`}</div>
+          <div className="text-sm text-white mt-2">{`${scans?.length} serviços expostos recentemente`}</div>
           <svg
             className="w-44 mt-3"
             height="6"
@@ -50,7 +48,7 @@ export const NameCard: React.FC<Props> = ({
           >
             <rect width="200" height="6" rx="3" fill="#2D2D2D" />
             <animated.rect
-              width={(tasksCompleted / 5) * 200}
+              width={((scans?.length ?? 0) / 5) * 200}
               height="6"
               rx="3"
               fill="url(#paint0_linear)"
@@ -69,17 +67,39 @@ export const NameCard: React.FC<Props> = ({
         </div>
         <div className="flex flex-col items-center">
           <Icon
-            path={rise ? "res-react-dash-bull" : "res-react-dash-bear"}
-            className="w-8 h-8"
+            path={
+              scans?.length ?? 0 ? "res-react-dash-bull" : "res-react-dash-bear"
+            }
+            className="w-8 h-8 invisible"
           />
           <animated.div
             className={`${
-              rise ? "text-green-500" : "text-red-500"
+              (scans?.length ?? 0) <= 10 ? "text-green-500" : "text-red-500"
             } font-bold text-lg`}
           >
-            {transactions.to((i) => `$${i.toFixed(2)}`)}
+            {scans?.length ?? 0}
           </animated.div>
-          <div className="text-sm text-white">Last 6 month</div>
+          <div className="text-sm text-white">Serviços expostos</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const EmptyHostCard = () => {
+  const onClick = () => {
+    window.location.href = "/dashboard/hosts/create";
+  };
+
+  return (
+    <div
+      className="w-full h-full p-2 cursor-pointer flex justify-center items=-center"
+      onClick={onClick}
+    >
+      <div className="rounded-lg bg-card flex flex-col items-center justify-between p-3 h-32">
+        <Icons.Plus className="w-10 h-10 fill-white" />
+        <div className="text-white text-center">
+          Click here to add more hosts so you can see them here
         </div>
       </div>
     </div>

@@ -29,13 +29,7 @@ export class HostsService {
     return this.repository.findOne(hostWhereUniqueInput);
   }
 
-  async findMany(params: {
-    skip?: number;
-    take?: number;
-    cursor?: Prisma.HostWhereUniqueInput;
-    where?: Prisma.HostWhereInput;
-    orderBy?: Prisma.HostOrderByWithRelationInput;
-  }): Promise<Host[]> {
+  async findMany(params: Prisma.HostFindManyArgs): Promise<Host[]> {
     return this.repository.findMany(params);
   }
 
