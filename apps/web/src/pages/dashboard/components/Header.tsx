@@ -7,6 +7,7 @@ import { Icon } from "./Icon";
 import { IconButton } from "./IconButton";
 
 export const Header: React.FC = () => {
+  const { userInfo } = AuthStore.get();
   const onSidebarHide = useCallback(() => {
     const currentValue = DashboardStore.get();
     DashboardStore.set({
@@ -23,12 +24,25 @@ export const Header: React.FC = () => {
     toast("You have been logged out");
   }, [AuthStore]);
 
+  const getGreetingMessage = () => {
+    if (userInfo) {
+      if (userInfo.firstName && userInfo.lastName) {
+        return `Olá, ${userInfo.firstName} ${userInfo.lastName}`;
+      } else {
+        return `Olá, ${userInfo.email}!`;
+      }
+    }
+    return "Olá, again";
+  };
+
   return (
     <div className="w-full sm:flex p-2 items-end sm:items-center">
       <div className="sm:flex-grow flex justify-between">
         <div className="">
           <div className="flex items-center">
-            <div className="text-3xl font-bold text-white">Hello David</div>
+            <div className="text-3xl font-bold text-white">
+              {getGreetingMessage()}
+            </div>
             <div className="flex items-center p-2 bg-card ml-2 rounded-xl">
               <Icon path="res-react-dash-premium-star" />
 
@@ -39,7 +53,7 @@ export const Header: React.FC = () => {
           </div>
           <div className="flex items-center">
             <Icon path="res-react-dash-date-indicator" className="w-3 h-3" />
-            <div className="ml-2 text-white">October 26</div>
+            <div className="ml-2 text-white">{new Date().toUTCString()}</div>
           </div>
         </div>
         <IconButton

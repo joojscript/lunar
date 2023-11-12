@@ -38,6 +38,9 @@ importers:
       '@nestjs/core':
         specifier: ^9.0.0
         version: 9.0.0(@nestjs/common@9.0.0)(@nestjs/platform-express@9.0.0)(reflect-metadata@0.1.13)(rxjs@7.2.0)
+      '@nestjs/event-emitter':
+        specifier: ^2.0.3
+        version: 2.0.3(@nestjs/common@9.0.0)(@nestjs/core@9.0.0)(reflect-metadata@0.1.13)
       '@nestjs/jwt':
         specifier: ^10.1.1
         version: 10.1.1(@nestjs/common@9.0.0)
@@ -1406,6 +1409,19 @@ packages:
       uuid: 8.3.2
     transitivePeerDependencies:
       - encoding
+
+  /@nestjs/event-emitter@2.0.3(@nestjs/common@9.0.0)(@nestjs/core@9.0.0)(reflect-metadata@0.1.13):
+    resolution: {integrity: sha512-Pt7KAERrgK0OjvarSI3wfVhwZ8X1iLq1lXuodyRe+Zx3aLLP7fraFUHirASbFkB6KIQ1Zj+gZ1g8a9eu4GfFhw==}
+    peerDependencies:
+      '@nestjs/common': ^8.0.0 || ^9.0.0 || ^10.0.0
+      '@nestjs/core': ^8.0.0 || ^9.0.0 || ^10.0.0
+      reflect-metadata: ^0.1.12
+    dependencies:
+      '@nestjs/common': 9.0.0(class-transformer@0.5.1)(class-validator@0.14.0)(reflect-metadata@0.1.13)(rxjs@7.2.0)
+      '@nestjs/core': 9.0.0(@nestjs/common@9.0.0)(@nestjs/platform-express@9.0.0)(reflect-metadata@0.1.13)(rxjs@7.2.0)
+      eventemitter2: 6.4.9
+      reflect-metadata: 0.1.13
+    dev: false
 
   /@nestjs/jwt@10.1.1(@nestjs/common@9.0.0):
     resolution: {integrity: sha512-sISYylg8y1Mb7saxPx5Zh11i7v9JOh70CEC/rN6g43MrbFlJ57c1eYFrffxip1YAx3DmV4K67yXob3syKZMOew==}
@@ -4219,6 +4235,10 @@ packages:
   /etag@1.8.1:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
     engines: {node: '>= 0.6'}
+
+  /eventemitter2@6.4.9:
+    resolution: {integrity: sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg==}
+    dev: false
 
   /eventemitter3@4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}

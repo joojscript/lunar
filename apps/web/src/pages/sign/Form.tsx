@@ -40,7 +40,7 @@ const SignForm: React.FC = () => {
       setIsLoading(true);
       switch (page) {
         case "FORM":
-          result = await makeRequest("/auth/login_attempt", {
+          result = await makeRequest("/users", {
             body: JSON.stringify({
               email: data.email,
             }),
@@ -49,6 +49,10 @@ const SignForm: React.FC = () => {
 
           if (result.status == 201) {
             toast.success("An OTP code was sent to your email");
+            AuthStore.set({
+              ...AuthStore.get(),
+              userInfo: await result.json(),
+            });
             setPage("OTP");
             return;
           } else {

@@ -1,3 +1,4 @@
+import { SYSTEM_EVENTS } from '@/globals/constants/events';
 import { MESSAGES } from '@/globals/constants/messages';
 import { IN_MEMORY_STORES } from '@/globals/constants/stores';
 import {
@@ -9,20 +10,33 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
+import { OnEvent } from '@nestjs/event-emitter';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '@prisma/client';
 import { UsersService } from '../users/users.service';
 import { LoginAttemptDto, VerifyOtpCodeDto } from './auth.dtos';
 
 @Injectable()
 export class AuthService {
+  logger = new Logger(AuthService.name);
+
   constructor(
     private readonly mailerService: MailerService,
     private readonly memoryStoreService: MemoryStoreService,
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
+
+  @OnEvent(SYSTEM_EVENTS.USERS.USER_CREATED)
+  async handleUserCreated(payload: User) {
+    this.logger.log(
+      "User was created, an OTP code is being sent to the user's email",
+    );
+    await this.sendOtpCode({ email: payload.email });
+  }
 
   async sendOtpCode(loginAttemptDto: LoginAttemptDto) {
     const foundUser = await this.usersService.findOne(loginAttemptDto);
