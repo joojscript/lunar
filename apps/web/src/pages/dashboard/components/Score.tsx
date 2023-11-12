@@ -1,21 +1,33 @@
 import { animated, config, useSpring } from "@react-spring/web";
+import { DashboardStore } from "@stores/dashboard.store";
+import type { ScanType } from "src/globals/types";
 import { map, pi, tau } from "../helpers";
 import { Icon } from "./Icon";
 
-export const Satisfication = () => {
+const getOpenedPercentage = (data?: Array<ScanType>): number => {
+  if (!data) return 0;
+  const howManyOpened = data?.filter((scan) => scan.state == "open").length;
+  return (howManyOpened / data?.length) * 100;
+};
+
+export const Score = () => {
+  const { latestData } = DashboardStore.get();
+  const data = latestData?.data;
+  const openPercentage = getOpenedPercentage(data);
+
   const { dashOffset } = useSpring({
-    dashOffset: 78.54,
-    // from: { dashOffset: 785.4 },
-    from: { dashOffset: 550 },
+    from: { dashOffset: 785.4 },
+    to: { dashOffset: openPercentage },
     config: config.molasses,
   });
+
   return (
     <div className="p-4 h-full">
       <div className="flex justify-between items-center">
-        <div className="text-white font-bold">Satisfication</div>
+        <div className="text-white font-bold">Score</div>
         <Icon path="res-react-dash-options" className="w-2 h-2" />
       </div>
-      <div className="mt-3 text-white">From all projects</div>
+      <div className="mt-3 text-white">Baseado em todos os seus hosts</div>
       <div className="flex justify-center">
         <svg
           viewBox="0 0 700 380"
@@ -36,7 +48,7 @@ export const Satisfication = () => {
             strokeWidth="40"
             strokeLinecap="round"
             strokeDasharray="785.4"
-            strokeDashoffset={dashOffset}
+            strokeDashoffset={openPercentage}
             id="svgPath"
             className="svgPath"
           />
@@ -180,8 +192,10 @@ export const Satisfication = () => {
         <div className="flex justify-between mt-2" style={{ width: "300px" }}>
           <div className="text-white w-10 pl-4">0%</div>
           <div className="w-30 text-white text-center">
-            <div className="font-bold text-[#2f49d1] text-[18px]">97.78%</div>
-            <div className="">Based on Likes</div>
+            <div className="font-bold text-[#2f49d1] text-[18px]">
+              {openPercentage}%
+            </div>
+            <div className="">Baseado em seus serviçoes expostos</div>
           </div>
           <div className="text-white w-12">100%</div>
         </div>

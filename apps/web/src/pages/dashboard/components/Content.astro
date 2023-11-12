@@ -4,7 +4,7 @@ import { AddComponent } from "./AddComponent";
 import { Graph } from "./Graph";
 import { Header } from "./Header";
 import { NameCard } from "./NameCard";
-import { Satisfication } from "./Satisfaction";
+import { Score } from "./Score";
 import { Segmentation } from "./Segmentation";
 import { TopServicesExposed } from "./TopServicesExposed";
 ---
@@ -47,7 +47,7 @@ import { TopServicesExposed } from "./TopServicesExposed";
       </div>
       <div class="w-full h-full p-2">
         <div class="rounded-lg bg-card h-80">
-          <TopServicesExposed client:idle />
+          <TopServicesExposed client:only />
         </div>
       </div>
 
@@ -58,7 +58,7 @@ import { TopServicesExposed } from "./TopServicesExposed";
       </div>
       <div class="w-full h-full p-2">
         <div class="rounded-lg bg-card h-80">
-          <Satisfication client:load />
+          <Score client:only />
         </div>
       </div>
       <div class="w-full h-full p-2">

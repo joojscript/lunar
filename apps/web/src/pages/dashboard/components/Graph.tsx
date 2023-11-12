@@ -1,15 +1,8 @@
-import React, { useRef } from "react";
 import useResizeObserver from "@react-hook/resize-observer";
-
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import { graphData } from "../helpers/data";
+import { DashboardStore } from "@stores/dashboard.store";
+import { groupBy } from "lodash";
+import React, { useRef } from "react";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import { Icon } from "./Icon";
 
 const useSize = (target: any) => {
@@ -29,9 +22,25 @@ const useSize = (target: any) => {
   return size;
 };
 
-export const Graph: React.FC<{}> = () => {
+type GraphDataType = {
+  service: string;
+  appearances: number;
+  info: Array<Record<string, unknown>>;
+};
+
+export const Graph: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const size = useSize(containerRef);
+  const { latestData } = DashboardStore.get();
+  const data = latestData?.data;
+  const groupedData = groupBy(data, "service");
+  const formattedData = Object.entries(groupedData).map<GraphDataType>(
+    ([service, appearances]) => ({
+      service,
+      appearances: appearances.length,
+      info: appearances,
+    })
+  );
 
   const CustomTooltip = () => (
     <div className="rounded-xl overflow-hidden tooltip-head bg-gradient-to-r from-violet-500 to-fuchsia-500">
@@ -45,24 +54,20 @@ export const Graph: React.FC<{}> = () => {
       </div>
     </div>
   );
+
   return (
     <div className="flex p-4 h-full flex-col">
       <div className="">
         <div className="flex items-center">
-          <div className="font-bold text-white">Your Work Summary</div>
-          <div className="flex-grow" />
-
-          <Icon path="res-react-dash-graph-range" className="w-4 h-4" />
-          <div className="ml-2 text-white">Last 9 Months</div>
-          <div className="ml-6 w-5 h-5 flex justify-center items-center rounded-full icon-background text-white">
-            ?
+          <div className="font-bold text-white">
+            Sumário de serviços Expostos Recentemente
           </div>
+          <div className="flex-grow" />
         </div>
-        <div className="font-bold ml-5 text-white">Nov - July</div>
       </div>
 
       <div ref={containerRef} className="flex-grow h-full">
-        <LineChart width={size.width} height={size.height} data={graphData}>
+        <LineChart width={size.width} height={size.height} data={formattedData}>
           <defs>
             <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
               <stop stopColor="#6B8DE3" />
@@ -71,25 +76,15 @@ export const Graph: React.FC<{}> = () => {
           </defs>
           <CartesianGrid horizontal={false} strokeWidth="6" stroke="#252525" />
           <XAxis
-            dataKey="name"
+            dataKey="service"
             axisLine={false}
             tickLine={false}
             tickMargin={10}
           />
           <YAxis axisLine={false} tickLine={false} tickMargin={10} />
-          <Tooltip content={<CustomTooltip />} cursor={false} />
-          <Line
-            activeDot={false}
-            type="monotone"
-            dataKey="expectedRevenue"
-            stroke="#242424"
-            strokeWidth="3"
-            dot={false}
-            strokeDasharray="8 8"
-          />
           <Line
             type="monotone"
-            dataKey="revenue"
+            dataKey="appearances"
             stroke="url(#paint0_linear)"
             strokeWidth="4"
             dot={false}
