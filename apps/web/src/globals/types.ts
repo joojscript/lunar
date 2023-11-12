@@ -9,3 +9,11 @@ export type ScanType = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type UserType = {
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  createdAt: Date;
+  updatedAt: Date;
+};

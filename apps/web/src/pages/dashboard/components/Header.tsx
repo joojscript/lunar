@@ -17,7 +17,7 @@ export const Header: React.FC = () => {
 
   const logout = useCallback(() => {
     const current = AuthStore.get();
-    delete current.session_id;
+    delete current.access_token;
     AuthStore.set(current);
     window.location.href = "/sign";
     toast("You have been logged out");
