@@ -186,6 +186,9 @@ importers:
       astro-compress:
         specifier: ^2.0.15
         version: 2.0.15
+      avvvatars-react:
+        specifier: ^0.4.2
+        version: 0.4.2(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
       axios:
         specifier: ^1.5.1
         version: 1.5.1
@@ -2676,6 +2679,19 @@ packages:
       picocolors: 1.0.0
       postcss: 8.4.31
       postcss-value-parser: 4.2.0
+    dev: false
+
+  /avvvatars-react@0.4.2(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-D/bnSM+P6pQi71dFeFVqQsqmv+ct5XG7uO2lvJoiksALpXLd6kPgpRR1SUQxFZJkJNrkmg0NPgbhIgJgOsDYRQ==}
+    peerDependencies:
+      react: '>= 16'
+      react-dom: '>= 16'
+    dependencies:
+      goober: 2.1.13(csstype@3.1.2)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - csstype
     dev: false
 
   /axios@1.5.1:

@@ -43,12 +43,19 @@ export const segmentationData = [
   { c1: "Other", c2: "126", c3: "#334ed8", color: "#2c3051" },
 ];
 
+export type SidebarItemType = {
+  id: string;
+  title: string;
+  notifications: number | boolean;
+  href?: string;
+};
+
 export const sidebarItems = [
   [
-    { id: "0", title: "Dashboard", notifications: false },
-    { id: "1", title: "Overview", notifications: false },
-    { id: "2", title: "Chat", notifications: 6 },
-    { id: "3", title: "Team", notifications: false },
+    { id: "0", title: "Dashboard", notifications: false, href: "/dashboard" },
+    { id: "1", title: "Seus Hosts", notifications: false, href: "/hosts" },
+    { id: "2", title: "Roadmap", notifications: 3, href: "/roadmap" },
+    { id: "3", title: "Quem somos", notifications: false, href: "/about" },
   ],
   [
     { id: "4", title: "Tasks", notifications: false },

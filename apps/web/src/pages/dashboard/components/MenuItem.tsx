@@ -20,7 +20,9 @@ export const MenuItem: React.FC<Props> = ({
   return (
     <div
       className={`w-full mt-6 flex items-center px-3 sm:px-0 xl:px-3 justify-start sm:justify-center xl:justify-start sm:mt-6 xl:mt-3 cursor-pointer ${
-        selected === id ? "sidebar-item-selected" : "sidebar-item"
+        selected === id
+          ? "sidebar-item-selected text-purple-700"
+          : "sidebar-item"
       }`}
       onClick={() => onClick(id)}
     >

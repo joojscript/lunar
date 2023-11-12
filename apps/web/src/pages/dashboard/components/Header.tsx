@@ -62,22 +62,13 @@ export const Header: React.FC = () => {
           onClick={onSidebarHide}
         />
       </div>
-      <div className="w-full sm:w-56 mt-4 sm:mt-0 flex justify-center items-center ml-3">
+      <div className="w-full sm:w-56 mt-4 sm:mt-0 flex justify-end items-center ml-3">
         <Icon
           path="res-react-dash-search"
           className="w-5 h-5 search-icon left-3 absolute"
         />
-        <form action="#" method="POST">
-          <input
-            type="text"
-            name="company_website"
-            id="company_website"
-            className="pl-12 py-2 pr-2 block w-full rounded-lg bg-transparent border-gray-300 bg-card"
-            placeholder="search"
-          />
-        </form>
         <div
-          className="w-12 h-6 ml-3 px-2 py-5 rounded-lg cursor-pointer flex justify-center items-center hover:bg-gray-500 hover:bg-opacity-5"
+          className="cursor-pointer hover:bg-gray-500 hover:bg-opacity-5"
           onClick={logout}
         >
           <PowerIcon className="fill-gray-500 h-5 w-5" />
