@@ -1,3 +1,4 @@
+import { Public } from '@/decorators/public.decorator';
 import {
   Body,
   Controller,
@@ -14,6 +15,7 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Public()
   @Post()
   create(@Body() createUserDto: CreateUserInput) {
     return this.usersService.createUser(createUserDto);
