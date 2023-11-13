@@ -44,12 +44,17 @@ export class HostsController {
   }
 
   @Post()
-  create(@Body() createHostDto: CreateHostInput) {
+  create(
+    @Body() createHostDto: CreateHostInput,
+    @Request() request: ExpressRequest,
+  ) {
+    console.log('oi');
     const formattedPayload: Prisma.HostCreateInput = {
       ...createHostDto,
+      verifiedAt: new Date(), // TODO: remove this
       owner: {
         connect: {
-          id: createHostDto.owner,
+          id: createHostDto.owner ?? request['userId'],
         },
       },
     };
@@ -58,8 +63,17 @@ export class HostsController {
   }
 
   @Get()
-  findAll() {
-    return this.hostsService.findMany({});
+  findAll(@Request() request: ExpressRequest) {
+    return this.hostsService.findMany({
+      where: {
+        owner: {
+          id: request['userId'],
+        },
+      },
+      include: {
+        scans: true,
+      },
+    });
   }
 
   @Get(':id')
@@ -89,19 +103,14 @@ export class HostsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHostDto: UpdateHostInput) {
-    const formattedPayload: Prisma.HostUpdateInput = {
-      ...updateHostDto,
-      owner: {
-        connect: {
-          id: updateHostDto.owner,
-        },
-      },
-    };
-
+  update(
+    @Param('id') id: string,
+    @Body() updateHostDto: UpdateHostInput,
+    @Request() request: ExpressRequest,
+  ) {
     return this.hostsService.updateHost({
-      where: { id },
-      data: formattedPayload,
+      where: { id, owner: { id: request['userId'] } },
+      data: updateHostDto as any,
     });
   }
 

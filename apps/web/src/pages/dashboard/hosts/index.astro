@@ -1,0 +1,16 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { HostsTable } from "./components/HostsTable";
+---
+
+<Layout title="Hosts | Lunar">
+  <a
+    href="/dashboard/hosts/create"
+    class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+  >
+    Add Host
+  </a>
+  <div class="relative overflow-x-auto">
+    <HostsTable client:only />
+  </div>
+</Layout>

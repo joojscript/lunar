@@ -53,9 +53,19 @@ export type SidebarItemType = {
 export const sidebarItems = [
   [
     { id: "0", title: "Dashboard", notifications: false, href: "/dashboard" },
-    { id: "1", title: "Seus Hosts", notifications: false, href: "/hosts" },
-    { id: "2", title: "Roadmap", notifications: 3, href: "/roadmap" },
-    { id: "3", title: "Quem somos", notifications: false, href: "/about" },
+    {
+      id: "1",
+      title: "Seus Hosts",
+      notifications: false,
+      href: "/dashboard/hosts",
+    },
+    { id: "2", title: "Roadmap", notifications: 3, href: "/dashboard/roadmap" },
+    {
+      id: "3",
+      title: "Quem somos",
+      notifications: false,
+      href: "/dashboard/about",
+    },
   ],
   [
     { id: "4", title: "Tasks", notifications: false },

@@ -23,5 +23,8 @@ export const makeRequest = async (path: string, options: RequestInit) => {
     });
     window.location.href = "/sign";
   }
+  if (result.status < 200 || result.status >= 300) {
+    throw new Error(`HTTP error ${result.status}`);
+  }
   return result;
 };

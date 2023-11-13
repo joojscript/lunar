@@ -15,6 +15,7 @@ export class CreateHostInput {
   })
   hostname!: string;
 
+  @IsOptional()
   @IsUUID('4', { message: MESSAGES.INVALID_OWNER })
   owner!: string;
 }

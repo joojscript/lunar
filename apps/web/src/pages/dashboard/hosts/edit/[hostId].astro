@@ -1,0 +1,12 @@
+---
+import Layout from "@layouts/Layout.astro";
+import HostsForm from "../components/HostsForm";
+
+const { hostId } = Astro.params;
+---
+
+<Layout title="Hosts | Lunar">
+  <div class="relative overflow-x-auto">
+    <HostsForm action="EDIT" client:only hostId={hostId} />
+  </div>
+</Layout>
