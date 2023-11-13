@@ -18,6 +18,8 @@ import { SchedulerService } from './scheduler.service';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         redis: {
+          username: configService.get<string>('REDIS_USERNAME'),
+          password: configService.get<string>('REDIS_PASSWORD'),
           host: configService.get<string>('REDIS_HOST'),
           port: configService.get<number>('REDIS_PORT'),
         },
