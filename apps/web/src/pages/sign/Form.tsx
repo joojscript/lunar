@@ -48,7 +48,7 @@ const SignForm: React.FC = () => {
           });
 
           if (result.status == 201) {
-            toast.success("An OTP code was sent to your email");
+            toast.success("Um código OTP foi enviado ao seu e-mail");
             AuthStore.set({
               ...AuthStore.get(),
               userInfo: await result.json(),
@@ -72,12 +72,12 @@ const SignForm: React.FC = () => {
           if (result.status == 200 || result.status == 201) {
             const data = await result.json();
             AuthStore.set({ ...AuthStore.get(), ...data });
-            toast.success("You are now logged in");
+            toast.success("Login efetuado com sucesso");
             window.location.href = "/dashboard";
             window.location.replace("/dashboard");
             return;
           } else {
-            toast.error("Invalid OTP code");
+            toast.error("Código OTP inválido");
           }
 
           console.log(result);
@@ -152,19 +152,19 @@ const SignForm: React.FC = () => {
                       className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-gradient-to-r from-violet-500 to-fuchsia-500 border-none text-white text-sm shadow-sm"
                       onClick={onSubmit}
                     >
-                      Verify Account
+                      Verificar conta
                     </button>
                   </div>
 
                   <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-400">
-                    <p>Didn't recieve code?</p>{" "}
+                    <p>Não recebeu o código?</p>{" "}
                     <a
                       className="flex flex-row items-center text-gray-200"
                       href="http://"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Resend
+                      Re-enviar
                     </a>
                   </div>
                 </div>
@@ -190,11 +190,11 @@ const SignForm: React.FC = () => {
                   <div className="text-center flex justify-center items-center flex-col">
                     <LunarLogo class="mx-auto" width="8rem" height="auto" />
                     <h4 className="text-xl font-semibold mt-1 mb-12 pb-1">
-                      Welcome aboard!
+                      Bem-vindo(a) a bordo!
                     </h4>
                   </div>
                   <form>
-                    <p className="mb-4">Please login to your account</p>
+                    <p className="mb-4">Por favor, informe seu e-mail</p>
                     <div className="mb-4">
                       {errors["email"] && (
                         <motion.div
@@ -214,9 +214,9 @@ const SignForm: React.FC = () => {
                           errors["email"] &&
                           "border-red-600 focus:border-red-600"
                         }`}
-                        placeholder="Your Email"
+                        placeholder="Seu Email"
                         {...register("email", {
-                          required: "Email is required",
+                          required: "O E-mail é obrigatório",
                         })}
                       />
                     </div>

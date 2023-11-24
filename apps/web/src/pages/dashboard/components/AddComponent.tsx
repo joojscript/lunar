@@ -26,19 +26,19 @@ export const AddComponent = () => {
           />
         </div>
         <div className="text-white font-bold mt-3">
-          No Components Created Yet
+          Adicionar Hosts
         </div>
         <div className="mt-2 text-white">
-          Simply create your first component
+          Quanto mais hosts estão cobertos e monitorados, mais
         </div>
-        <div className="mt-1 text-white">Just click on the button</div>
-        <div className="cursor-pointer flex items-center p-3 mt-3 bg-[#2f49d1] rounded-[15px] padding-[8px 16px] justify-center text-white">
+        <div className="mt-1 text-white">protegido você está.</div>
+        <a href="dashboard/hosts/create" className="cursor-pointer flex items-center p-3 mt-3 bg-[#2f49d1] rounded-[15px] padding-[8px 16px] justify-center text-white">
           <Icon path="res-react-dash-add-component" className="w-5 h-5" />
-          <div className="ml-2">Add Component</div>
-          <div className="ml-2 bg-[#4964ed] rounded-[15px] pt-1 pb-1 pl-2 pr-2">
+          <div className="ml-2">Adicionar host</div>
+          {/* <div className="ml-2 bg-[#4964ed] rounded-[15px] pt-1 pb-1 pl-2 pr-2">
             129
-          </div>
-        </div>
+          </div> */}
+        </a>
       </div>
     </div>
   );

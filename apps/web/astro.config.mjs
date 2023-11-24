@@ -1,6 +1,5 @@
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel";
 import compress from "astro-compress";
 import { defineConfig } from "astro/config";
 
@@ -18,6 +17,4 @@ export default defineConfig({
       minify: true,
     },
   },
-  output: "server",
-  adapter: vercel(),
 });

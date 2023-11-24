@@ -40,13 +40,13 @@ export const Navbar = () => {
               Home
             </a>
             <a className="navbar-link" href="#features" aria-label="Features">
-              Features
+              Funcionalidades
             </a>
             <a className="navbar-link" href="#pricing" aria-label="Pricing">
-              Pricing
+              Planos
             </a>
             <a className="navbar-link" href="#feedback" aria-label="Feedback">
-              Feedback
+              Contato
             </a>
             <a className="navbar-link" href="#FAQ" aria-label="FAQ">
               FAQ
@@ -64,9 +64,9 @@ export const Navbar = () => {
               className="text-white custom-border-gray rounded-xl
            bg-customDarkBg2 hover:bg-customDarkBg3  border-gray-700 pl-6 pr-6 pt-2 pb-2 text-sm flex"
               href={session_id ? "/dashboard" : "/sign"}
-              aria-label={session_id ? "Get Inside" : "Get Onboard"}
+              aria-label={session_id ? "Get Inside" : "Iniciar Sessão"}
             >
-              {session_id ? "Get Inside" : "Get Onboard"}
+              {session_id ? "Get Inside" : "Iniciar Sessão"}
             </a>
           </div>
         </motion.div>
